@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>ASCII Weather</title>
+  <style>
+    body {
+      background: #0f0f0f;
+      color: #fff;
+      font-family: monospace;
+      text-align: center;
+      display: grid;
+      place-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .weather {
+      background: #000;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0, 255, 0, 0.4);
+      width: 90%;
+      max-width: 600px;
+    }
+
+    input, button, select {
+      padding: 10px;
+      margin: 10px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 2px solid green;
+      background: #121212;
+      color: lime;
+      font-family: monospace;
+    }
+
+    button {
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    button:hover {
+      transform: scale(1.08);
+    }
+
+    iframe {
+      width: 100%;
+      height: 500px;
+      margin-top: 20px;
+      display: none;
+      border: 1px solid green;
+    }
+
+    #cursor {
+      width: 10px;
+      height: 25px;
+      background: lime;
+      display: none;
+      margin: 10px auto;
+      animation: blink 1s steps(1) infinite;
+    }
+
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="weather">
+    <h1>🌤 ASCII Weather</h1>
+    <datalist id="cities">
+  <option value="New York">
+  <option value="London">
+  <option value="Paris">
+  <option value="Tokyo">
+  <option value="Dubai">
+  <option value="Los Angeles">
+  <option value="Rome">
+  <option value="Barcelona">
+  <option value="Istanbul">
+  <option value="Singapore">
+  <option value="Bangkok">
+  <option value="Hong Kong">
+  <option value="Berlin">
+  <option value="Sydney">
+  <option value="Toronto">
+  <option value="Amsterdam">
+  <option value="Moscow">
+  <option value="San Francisco">
+  <option value="Chicago">
+  <option value="Beijing">
+  <option value="Seoul">
+  <option value="Las Vegas">
+  <option value="Vienna">
+  <option value="Rio de Janeiro">
+  <option value="Cairo">
+  <option value="Mumbai">
+  <option value="Delhi">
+  <option value="Mexico City">
+  <option value="Buenos Aires">
+  <option value="Jakarta">
+  <option value="Kuala Lumpur">
+  <option value="Melbourne">
+  <option value="Miami">
+  <option value="Venice">
+  <option value="Prague">
+  <option value="Lisbon">
+  <option value="Athens">
+  <option value="Budapest">
+  <option value="Oslo">
+  <option value="Copenhagen">
+  <option value="Warsaw">
+  <option value="Stockholm">
+  <option value="Zurich">
+  <option value="Manila">
+  <option value="Lima">
+  <option value="Tehran">
+  <option value="Baghdad">
+  <option value="Havana">
+  <option value="Doha">
+  <option value="Abu Dhabi">
+  <option value="Nairobi">
+  <option value="Cape Town">
+  <option value="Santiago">
+  <option value="Brussels">
+  <option value="Dublin">
+  <option value="Edinburgh">
+  <option value="Reykjavik">
+  <option value="Helsinki">
+  <option value="Taipei">
+  <option value="Shenzhen">
+  <option value="Guangzhou">
+  <option value="Chengdu">
+  <option value="Lahore">
+  <option value="Karachi">
+  <option value="Islamabad">
+  <option value="Baku">
+  <option value="Doha">
+  <option value="Amman">
+  <option value="Kuwait City">
+  <option value="Casablanca">
+  <option value="Rabat">
+  <option value="Tunis">
+  <option value="Accra">
+  <option value="Addis Ababa">
+  <option value="Algiers">
+  <option value="Hanoi">
+  <option value="Phnom Penh">
+  <option value="Yangon">
+  <option value="Colombo">
+  <option value="Kathmandu">
+  <option value="Tbilisi">
+  <option value="Yerevan">
+  <option value="Kigali">
+  <option value="Lusaka">
+  <option value="Maputo">
+  <option value="Luanda">
+  <option value="Harare">
+  <option value="Dhaka">
+  <option value="Bangalore">
+  <option value="Chennai">
+  <option value="Hyderabad">
+  <option value="Ahmedabad">
+  <option value="Jaipur">
+  <option value="Pune">
+  <option value="Surat">
+  <option value="Kanpur">
+  <option value="Nagpur">
+  <option value="Multan">
+  <option value="Quetta">
+  <option value="Skardu">
+  <option value="Gilgit">
+</datalist>
+    <input type="text" id="city" placeholder="Enter city" list="cities">
+    
+    <select id="format">
+      <option value="">Default</option>
+      <option value="1">Format 1</option>
+      <option value="2">Format 2</option>
+      <option value="3">Format 3</option>
+    </select>
+    
+    
+    <button onclick="getWeather()">Get Weather</button>
+
+    
+
+    <iframe id="weatherFrame"></iframe>
+    <div id="cursor"></div>
+  </div>
+
+  <script>
+    function getWeather() {
+      const city = document.getElementById('city').value.trim();
+      const format = document.getElementById('format').value;
+      const frame = document.getElementById('weatherFrame');
+      const cursor = document.getElementById('cursor');
+
+      if (!city) return alert("Please enter a city name.");
+
+      const formatParam = format ? `?format=${format}` : '';
+      frame.src = `https://wttr.in/${encodeURIComponent(city)}${formatParam}`;
+      frame.style.display = "block";
+      cursor.style.display = "block";
+    }
+  </script>
+
+</body>
+
+</html>
